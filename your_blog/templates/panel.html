@@ -1,0 +1,46 @@
+{% load staticfiles %}
+
+{% comment %} <div class="container d-none d-lg-block"> {% endcomment %}
+<div class="d-none d-lg-block">
+    <div class="card border-0">
+        <img src="{% static 'images/avatar.gif' %}" class="card-img-top mt-4" alt="avatar"
+            style="border-radius: 4px; width:120px;padding:5px;border:1px solid #ddd;display:block;margin-left:auto;margin-right:auto;" />
+        <div class="card-body">
+            <div class="col-12">
+                <p class="text-center mb-4">sleepworm</p>
+            </div>
+            {% comment %} <div class="row"> {% endcomment %}
+                <div class="col-3 text-center">
+                    <span style="font-size: small;">{{ stats.article_count }}</span>
+                </div>
+                <div class="col-6 text-center">
+                    <span style="font-size: small;">{{ stats.category_count }}</span>
+                </div>
+                <div class="col-3 text-center">
+                    <span style="font-size: small;">{{ stats.tag_count }}</span>
+                </div>
+            {% comment %} </div> {% endcomment %}
+            {% comment %} <div class="row"> {% endcomment %}
+                <div class="col-3 text-center text-nowrap">
+                    <a style="color: #5b5b5b; font-size: small;" href="{% url 'article:article_list' %}">posts</a>
+                </div>
+                <div class="col-6 text-center">
+                    <a style="color: #5b5b5b; font-size: small;"
+                        href="{% url 'article:article_categories' %}">categories</a>
+                </div>
+                <div class="col-3 text-center text-nowrap">
+                    <a style="color: #5b5b5b; font-size: small;" href="{% url 'article:article_tags' %}">tags</a>
+                </div>
+            {% comment %} </div> {% endcomment %}
+        </div>
+    </div>
+
+    <!-- Search Widget -->
+    <div class="mt-4">
+        <form class="form-inline">
+            <input style="width:100%;" type="text" class="form-control" name="search" placeholder="Search for..."
+                required>
+        </form>
+    </div>
+
+</div>
