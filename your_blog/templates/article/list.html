@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %} Home Page {% endblock title %}
+
+{% block content %}
+<div class="container">
+    {% for article in articles %}
+    <div class="row text-dark row-cols-1" style="height:400px; margin-bottom: 20px">
+        <!-- title -->
+        <div style="height: 100px;" class="text-center mt-4">
+            <h3 >
+                <a href="#" style="color: rgb(40, 40, 40);">
+                    {{ article.title }}</a>
+            </h3>
+            <div>
+                <span style="font-size: small;">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    Posted on {{ article.updated|date:'Y-m-d' }}
+                </span>
+                &nbsp;&nbsp;
+            </div>
+        </div>
+        <!--BODY 100px height-->
+        <div style="height:100px;" class="text-left ml-4 article_list">
+            <p style="color:gray;">
+                {{ article.body|slice:'40'}}
+            </p>
+        </div>
+        <!--READ MORE button-->
+        <div style="height:100px" class="text-center">
+            <a class="btn btn-outline-secondary" href="{% url 'article:article_detail' article.id %}">Read
+                more &raquo;</a>
+            {% if not forloop.last %}
+            <hr style="align:center;width:120px;margin-top:40px">
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
