@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+    <div class="mt-4 row">
+        <div class="col-lg-8">
+            <h4 class="text-center">Tags</h4>
+        </div>
+        <div class="col-lg-8">
+            <p class="text-center">{{ tags.count }} tags in total </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            {% for key,value in font_size.items %}
+            <a style="color: #5b5b5b; text-decoration: underline; font-size: {{ value }}px;" class="mx-4"
+                href="{%url 'article:article_list' %}?tag={{ key }}">
+                {{ key }}
+                {% endfor %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
