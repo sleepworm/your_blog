@@ -9,17 +9,28 @@ MIN_FONT_SIZE = 16
 def convert_num_to_font_size(max_num, num):
     return max((int)(num / max_num * MAX_FONT_SIZE), MIN_FONT_SIZE)
 
+def article_stats():
+    article_list = ArticlePost.objects.all()
+    tags = Tag.objects.all()
+    category_list = ArticleCategory.objects.all()
+    stats_context = {
+        'article_count': len(article_list),
+        'tag_count': len(tags),
+        'category_count': len(category_list),
+    }
+    return stats_context
+
 # Create your views here.
 def article_list(request):
     article_list = ArticlePost.objects.all()
-    context = {'articles': article_list}
+    context = {'articles': article_list, 'stats': article_stats()}
     return render(request, 'article/list.html', context)
 
 
 def article_detail(request, pk):
     article = get_object_or_404(ArticlePost, pk=pk) # ArticlePost.objects.get(pk=id)
 
-    context = {'article': article }
+    context = {'article': article, 'stats': article_stats() }
     return render(request, 'article/detail.html', context)
 
 def article_categories(request):
@@ -30,7 +41,10 @@ def article_categories(request):
         articles = article_list.filter(category__title__icontains=category)
         category_post_count[category.title]=len(articles)
 
-    context = {'category_post_count': category_post_count}
+    context = {
+        'category_post_count': category_post_count,
+        'stats': article_stats(),
+    }
     return render(request, 'article/categories.html', context)
 
 def article_tags(request):
@@ -50,5 +64,9 @@ def article_tags(request):
     font_size = {}
     for tag, num in counts.items():
         font_size[tag] = convert_num_to_font_size(max_s, num)
-    context = {'tags': tags, 'font_size': font_size,}
+    context = {
+        'tags': tags, 
+        'font_size': font_size,
+        'stats':article_stats()
+    }
     return render(request, 'article/tags.html', context)    
