@@ -8,4 +8,5 @@ urlpatterns = [
     path('article-detail/<int:pk>', views.article_detail, name="article_detail"),
     path('article-categories/', views.article_categories, name='article_categories'),
     path('article-tags/', views.article_tags, name='article_tags'),
+    path('article-archives/', views.article_archives, name='article_archives'),
 ]

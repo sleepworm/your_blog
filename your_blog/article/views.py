@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import ArticlePost, ArticleCategory
+from django.core.paginator import Paginator
 from taggit.models import Tag
 
 MAX_FONT_SIZE = 52
@@ -70,3 +71,11 @@ def article_tags(request):
         'stats':article_stats()
     }
     return render(request, 'article/tags.html', context)    
+
+def article_archives(request):
+    article_list = ArticlePost.objects.all()
+    paginator = Paginator(article_list, 10)
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
+    context = {'articles': articles, 'total': article_list.count, 'stats': article_stats(),}
+    return render(request, 'article/archives.html', context)   

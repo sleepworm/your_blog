@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-4 ">
+        <div class="col-12">
+            <h5 class="mb-4">Um..! {{ total }} posts in total. Keep on posting</h5>
+            <ul class="post_timeline">
+                {% for article in articles %}
+                <li>
+                    <a style="color: #5b5b5b;"
+                        href="{% url 'article:article_detail' article.id %}">{{ article.created|date:'m-Y' }}&nbsp;&nbsp;&nbsp;{{ article.title }}</a>
+                    <hr style="border-top:1px dashed #c5c5c5;">
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
