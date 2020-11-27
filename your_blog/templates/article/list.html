@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load markdownify %}
 {% block title %} Home Page {% endblock title %}
 
 {% block content %}
@@ -23,7 +24,7 @@
         <!--BODY 100px height-->
         <div style="height:100px;" class="text-left ml-4 article_list">
             <p style="color:gray;">
-                {{ article.body|slice:'40'}}
+                {{ article.body|slice:'40'|markdownify}}
             </p>
         </div>
         <!--READ MORE button-->

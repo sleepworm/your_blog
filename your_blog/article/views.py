@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import ArticlePost, ArticleCategory
 from django.core.paginator import Paginator
 from taggit.models import Tag
+import markdown
 
 MAX_FONT_SIZE = 52
 MIN_FONT_SIZE = 16
@@ -30,8 +31,16 @@ def article_list(request):
 
 def article_detail(request, pk):
     article = get_object_or_404(ArticlePost, pk=pk) # ArticlePost.objects.get(pk=id)
+    
+    md = markdown.Markdown(
+        extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        'markdown.extensions.toc',
+        ]) 
+    article.body = md.convert(article.body)
 
-    context = {'article': article, 'stats': article_stats() }
+    context = {'article': article, 'toc': md.toc, 'stats': article_stats() }
     return render(request, 'article/detail.html', context)
 
 def article_categories(request):

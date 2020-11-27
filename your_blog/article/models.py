@@ -31,5 +31,8 @@ class ArticlePost(models.Model):
 
     tags = TaggableManager(blank=True)
 
+    class Meta:
+        ordering = ('-created',)
+
     def __str__(self):
         return self.title

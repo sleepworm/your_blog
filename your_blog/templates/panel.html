@@ -34,4 +34,15 @@
         </div>
     </div>
 
+    {% if toc %}
+    <div class="card border-0" style="margin-top:20px">
+        <div class="text-center">
+            <h2 style="font-size: 18px; margin-top: 20px; margin-bottom:20px">Table of Contents</h2>
+        </div>
+        <div style="margin-left:20px;" id="tocBlock">
+            {{ toc|safe }}
+        </div>
+    </div>
+    {% endif %}
+
 </div>

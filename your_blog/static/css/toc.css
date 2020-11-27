@@ -1,0 +1,22 @@
+div.toc>ul {
+    margin-left: -40px;
+}
+
+div.toc>ul>li>ul,
+div.toc>ul>li>ul>li>ul {
+    margin-left: -20px;
+}
+
+#tocBlock a {
+    color: #252525;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+#tocBlock ul {
+    list-style-type: none;
+}
+
+#tocBlock li {
+    margin-top: 10px;
+}
